@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1591592914793.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "272422F2",
+    "lastKnownWriteTime" : 1591592933,
+    "last_content_update" : 1591592933220,
+    "path" : "/media/khan/Codes/Ebooks&Lectures/Level-4_Term-2/Thesis/Corona/bd_prediction/bd_prediction/R/plotters/plot_both.R",
+    "project_path" : "R/plotters/plot_both.R",
+    "properties" : {
+        "cursorPosition" : "81,15",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

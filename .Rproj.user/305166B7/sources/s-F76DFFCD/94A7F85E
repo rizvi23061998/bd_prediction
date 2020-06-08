@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1591598230988.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "94A7F85E",
+    "lastKnownWriteTime" : 1591471226,
+    "last_content_update" : 1591605412098,
+    "path" : "/media/khan/Codes/Ebooks&Lectures/Level-4_Term-2/Thesis/Corona/bd_prediction/bd_prediction/R/plotters/plot_segment.R",
+    "project_path" : "R/plotters/plot_segment.R",
+    "properties" : {
+        "cursorPosition" : "44,0",
+        "scrollLine" : "35"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
