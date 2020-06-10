@@ -36,7 +36,8 @@ data$case_data_death <- data$cases
 
 # rec_type = "beta_365"
 # rec_type = "gamma_365"
-rec_type="both_730"
+rec_type="both"
+
 id = "test"
 scaled_beta = rep(1,forecast_window)
 

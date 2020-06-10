@@ -1,5 +1,9 @@
 library(ggplot2)
-
+library(scales)
+library(viridis)
+library(RColorBrewer)
+library(ggsci)
+source("R/plotters/death_plot_segment.R")
 
 death_rate <- 0.031 * 0.196 * 0.593
 
@@ -44,10 +48,10 @@ death_10_gamma <- sum(plot_df_10_gamma$Inc_pred)
 death_20_gamma <- sum(plot_df_20_gamma$Inc_pred)
 death_30_gamma <- sum(plot_df_30_gamma$Inc_pred)
 
-death_df <- c("No Change" = death_no_change, "10% Reduction\n of Beta" = death_10_beta,
-              "20% Reduction\n of Beta" = death_20_beta,"30% Reduction\n of Beta" = death_30_beta,
-              "10% Increase\n of Gamma" = death_10_gamma,"20% Increase\n of Gamma" = death_20_gamma,
-              "30% Increase\n of Gamma" = death_30_gamma)
+death_df <- c("No Change" = death_no_change, "10% Reduction\nof Beta" = death_10_beta,
+              "20% Reduction\nof Beta" = death_20_beta,"30% Reduction\nof Beta" = death_30_beta,
+              "10% Increase\nof Gamma" = death_10_gamma,"20% Increase\nof Gamma" = death_20_gamma,
+              "30% Increase\nof Gamma" = death_30_gamma)
 
 death_df<- as.data.frame(death_df)
 death_df <- apply(death_df, 2, round)
@@ -68,17 +72,35 @@ color_val <- c(color_val,
 color_val <- c("red","orange","#b3ff00","#096e02","orange","#b3ff00","#096e02")
 names(color_val) <- death_df$x
 
-g_case <- ggplot(data = death_df,aes(x=x,y=y,fill=x))+
+source("R/plotters/death_plot_both.R")
+
+death_df <- rbind(death_df,death_df_both)
+# color_val <- c(color_val,color_val_both)
+
+death_df <- rbind(death_df,death_seg_df(type = "beta_seg_60_2",seg_type = "(60-30 Segment)"))
+death_df <- rbind(death_df,death_seg_df(type = "beta_seg_90_2",seg_type = "(90-30 Segment)"))
+
+
+
+death_df$x <- factor(death_df$x,levels = death_df[order(death_df$y),"x"])
+
+g_case <- ggplot(data = death_df,aes(x=x,y=y,fill=(-y)))+
   # geom_polygon(aes(x=Dates,y= Cases),fill = "#c9e5ff")+
   # geom_point(data = plot_df_no,aes(x=Dates,y=Inc,color="Real")) +
-  geom_bar(stat = "identity",width = .7)+
-  geom_text(aes(label=y), vjust=-0.3, size=3.5)+
-  scale_fill_manual(values = color_val) + 
+  geom_bar(stat = "identity",width = .6)+
+  geom_text(aes(label=y), hjust=-0.3, size=3.5,col="black")+
+  # scale_fill_manual(values = color_val) + 
+  # scale_x_continuous(limits = c(0,5e5))+
   labs(x = "Intervention Type",y = "Total Death upto 365 day")+
+  theme_bw()+
   theme(legend.position = "none",
-        axis.text = element_text(colour = "black",size = 10,angle = 60,hjust=1),
-        axis.title = element_text(color = "navyblue",size = 12))
-  
+        axis.text = element_text(colour = "black",size = 9,angle = 0,hjust=1),
+        axis.title = element_text(color = "navyblue",size = 14))+
+  # scale_fill_gradient2( position = "left",low = "green", high = "red",
+                        # midpoint = median(death_df$y))+
+  scale_fill_viridis(option = "E")+
+  # scale_fill_lancet()+
+  coord_flip(ylim = c(0,5e5))
   
 # 
 

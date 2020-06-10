@@ -36,8 +36,8 @@ for (ii in 2:3){
 # names(c25) <- c(LETTERS[1:25],"Real")
 # 
 # 
-g_case <- ggplot()+
-  geom_point(data = (dfs[[1]]),aes(x=Dates,y=Inc,color="Real"))
+# g_case <- ggplot()+
+#   geom_point(data = (dfs[[1]]),aes(x=Dates,y=Inc,color="Real"))
 # 
 # 
 # for (ii in 1:length(dfs)){
@@ -62,13 +62,13 @@ type = "beta_365"
 plot_df_no <- readRDS(paste0("outputs/rds/df/df_no_red_",type,".rds"))
 
 
-color_val <- c("Real" = "blue","No Reduction" = "red",
-               "10%-10%" = "skyblue2", "10%-20%" = "orange",
-               "20%-10%" = "#b3ff00", '20%-20%' = "#096e02")
+color_val <- c("Real" = "blue","No Change" = "red",
+               "10% Reduction(Beta),\n10% Increase(Gamma)" = "skyblue2", "10% Reduction(Beta),\n20% Increase(Gamma)" = "orange",
+               "20% Reduction(Beta),\n10% Increase(Gamma)" = "#b3ff00", "20% Reduction(Beta),\n20% Increase(Gamma)" = "#096e02")
 
 g_case <- ggplot()+
-  geom_point(data = plot_df_no,aes(x=Dates,y=Inc,color="Real"))+
-  geom_line(data=plot_df_no,aes(x=Dates,y=Inc_pred,col = "No Reduction"),size = 1)
+  # geom_point(data = plot_df_no,aes(x=Dates,y=Inc,color="Real"))+
+  geom_line(data=plot_df_no,aes(x=Dates,y=Inc_pred,col = "No Change"),size = 1)
             
 for(ii in 1:length(dfs)){
   g_case <- g_case +
@@ -76,12 +76,19 @@ for(ii in 1:length(dfs)){
 }
 
 g_case <- g_case+
-  labs(x = "Dates", y= "Daily Incidence",color="") +
-  scale_color_manual(values = color_val)
+  labs(x = "Dates", y= "Number of Cases(Daily)") +
+  theme(legend.position = c(.83,.8),legend.key.size = unit(1.8,"line"),
+        legend.text=element_text(size = 10),
+        legend.title = element_text(colour = 'red',size=13),
+        legend.title.align =  .5,
+        axis.text  = element_text(size=12),
+        axis.title = element_text(colour ="navyblue",size=14))+
+  scale_color_manual(name="Intervention\nType",values = color_val)
               
-type = rec_type
+# type = rec_type
+type = "both"
 
-tiff(paste0("outputs/img/case_",type,".tiff"),res = 300,height = 3000,width = 3000,unit = "px")
+tiff(paste0("outputs/img/case_",type,".tiff"),res = 300,height = 2000,width = 2000,unit = "px")
 print(g_case)
 dev.off()
 
