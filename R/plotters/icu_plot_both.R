@@ -104,3 +104,5 @@ type = paste0("both",icu_period)
 tiff(paste0("outputs/img/icu/icu_",type,".tiff"),res = 300,height = 2000,width = 2000,unit = "px")
 print(g_icu)
 dev.off()
+
+saveRDS(g_icu,paste0("outputs/rds/img/icu",type,".rds"))

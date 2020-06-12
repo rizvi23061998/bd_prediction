@@ -39,7 +39,7 @@ data$case_data_death <- data$cases
 rec_type="both"
 
 id = "test"
-scaled_beta = rep(1,forecast_window)
+scaled_beta = 1#rep(1,forecast_window)
 
 ids = c("no_red","10_red","20_red","30_red")
 ids2 = c("no_inc","10_inc","20_inc","30_inc")

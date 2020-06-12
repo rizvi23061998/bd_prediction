@@ -2,7 +2,7 @@ library(ggplot2)
 library(tidyr)
 
 icu_rate <- 0.031 * 0.196
-icu_period <- 9
+icu_period <- 4
 total_icu <- 1174
 
 
@@ -138,3 +138,5 @@ type = paste0("comb",icu_period)
 tiff(paste0("outputs/img/icu/icu_",type,".tiff"),res = 300,height = 2000,width = 2000,unit = "px")
 print(g_icu)
 dev.off()
+
+saveRDS(g_icu,paste0("outputs/rds/img/icu",type,".rds"))
